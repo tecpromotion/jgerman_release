@@ -96,7 +96,7 @@ function _renameStringInFile()
     # $2 = Search string
     # $3 = Replace string
 
-    sed -i 's/'"${2}"'/'"${3}"'/g' "${1}"
+    sed -i '' 's/'"${2}"'/'"${3}"'/g' "${1}"
 }
 
 function _renameStringInFilesByDir()
@@ -106,7 +106,7 @@ function _renameStringInFilesByDir()
     # $2 = Search string
     # $3 = Replace string
 
-    find "${1}" -type f -exec sed -i 's/'"${2}"'/'"${3}"'/g' {} \;
+    find "${1}" -type f -exec sed -i '' ''s/'"${2}"'/'"${3}"'/g' {} \;
 }
 
 function _downloadFromUrlAndUnpackTar()

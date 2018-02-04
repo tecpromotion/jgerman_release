@@ -8,5 +8,4 @@
 
 # This file only loads the "framework" in the necessary order
 importSource "${HELPERS_DIR}/general.sh"
-importSource "${HELPERS_DIR}/view.sh"
 importSource "${HELPERS_DIR}/packages.sh"

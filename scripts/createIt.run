@@ -21,21 +21,8 @@ function importSource()
 	fi
 }
 
-# Initialise some variables
-ABSOLUTE_PATH="$(dirname "$(readlink -m "${0}")")"
-
-# Some special dirs
-HELPERS_DIR="${ABSOLUTE_PATH}/helpers"
-EXPORT_DIR="${ABSOLUTE_PATH}/export"
-TMP_DIR="${ABSOLUTE_PATH}/temp"
-GIT_DIR="${TMP_DIR}/gitCheckout"
-
-# Some URLs
-GIT='git://github.com/joomlagerman/joomla.git'
-
-
 # First we import the "framework"
-importSource "${ABSOLUTE_PATH}/loader.sh"
+importSource "${SCRIPTS_PATH}/loader.sh"
 
 
 # Then start the main program
@@ -44,7 +31,6 @@ checkDirExistsOrCreateIt "${EXPORT_DIR}"
 checkDirExistsOrCreateIt "${GIT_DIR}"
 
 # Show start screen and ask for some details. Then we can start working
-startScreen
 loadGit "${GIT}" "${TRANSLATION_VERSION}"
 
 # "de-DE" must be the first
