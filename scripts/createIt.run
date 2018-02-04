@@ -1,0 +1,61 @@
+#!/bin/bash
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+#      Name: Create Joomla!-Translation Release for J! 3.6                     #
+#   Version: 2.5 (2016-05-14)                                                  #
+#    Author: Jan Erik Zassenhaus (sisko1990@users.sourceforge.net)             #
+# Copyright: Copyright (C) 2012 Jan Erik Zassenhaus. All rights reserved.      #
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+function importSource()
+{
+	## Parameter:
+	# $1 = The absolute path to the file to import in the script
+
+	# First check if variable is not empty and second if it is a file
+	if [[ ! -z "${1}" && -f "${1}" ]]; then
+		source "${1}"
+	else
+		echo "The file '${1}' could not be found!"
+		exit 1
+	fi
+}
+
+# Initialise some variables
+ABSOLUTE_PATH="$(dirname "$(readlink -m "${0}")")"
+
+# Some special dirs
+HELPERS_DIR="${ABSOLUTE_PATH}/helpers"
+EXPORT_DIR="${ABSOLUTE_PATH}/export"
+TMP_DIR="${ABSOLUTE_PATH}/temp"
+GIT_DIR="${TMP_DIR}/gitCheckout"
+
+# Some URLs
+GIT='git://github.com/joomlagerman/joomla.git'
+
+
+# First we import the "framework"
+importSource "${ABSOLUTE_PATH}/loader.sh"
+
+
+# Then start the main program
+checkDirExistsOrCreateIt "${TMP_DIR}"
+checkDirExistsOrCreateIt "${EXPORT_DIR}"
+checkDirExistsOrCreateIt "${GIT_DIR}"
+
+# Show start screen and ask for some details. Then we can start working
+startScreen
+loadGit "${GIT}" "${TRANSLATION_VERSION}"
+
+# "de-DE" must be the first
+createDeDeTranslationPackages
+# de-CH
+createDeChTranslationPackages
+# de-AT
+createDeAtTranslationPackages
+# de-LI
+createDeLiTranslationPackages
+# de-LU
+createDeLuTranslationPackages
+
+#syncToSourceForge
