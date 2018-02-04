@@ -12,7 +12,7 @@ function _renameStringInFile()
     # $2 = Search string
     # $3 = Replace string
 
-    sed -i 's/'"${2}"'/'"${3}"'/g' "${1}"
+    sed -i '' 's/'"${2}"'/'"${3}"'/g' "${1}"
 }
 
 function _createInstallLangFiles()
